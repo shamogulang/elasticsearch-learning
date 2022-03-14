@@ -1,6 +1,9 @@
 package cn.oddworld.controller;
 
+import cn.oddworld.Jeffchan;
 import cn.oddworld.Person;
+import cn.oddworld.repository.JeffchanRepository;
+import cn.oddworld.repository.PersonEsDao;
 import cn.oddworld.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,17 +29,40 @@ public class HelloController {
 
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
+    private PersonEsDao personEsDao;
+    @Autowired
+    private JeffchanRepository jeffchanRepository;
+
+    @RequestMapping(value = "jeffchan", method = RequestMethod.GET)
+    public ResponseEntity<?> jeffchan(){
+
+
+        personEsDao.getjeffchan();
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "hello", method = RequestMethod.GET)
     public ResponseEntity<?> hello(){
 
 
-        Person person = new Person();
-        person.setAge(11);
-        person.setName("陈剑辉");
-        person.setDesc("我是真的真好像你");
-        personRepository.save(person);
+        for(int i = 0; i< 1000; i++){
+            Person person = new Person();
+            person.setName("周杰伦首次亮相幕前，是在1997年8月，当时是因为高中同学参加TVBS-G的选秀节目《超级新人王》而为朋友担任钢琴伴奏。虽然他同学歌唱未获奖，该节目主持人吴宗宪却对周杰伦的乐谱作曲工整印象深刻，认为其有潜力进而签约发掘进入乐坛。吴宗宪非常肯定周杰伦的才华，所以先让他专注作曲的历练后再出唱片，虽写过多首歌曲不过仍有不少曲目未被他人采用而退稿，例如：刘德华《眼泪知道》和张惠妹《忍者》。吴宗宪对周杰伦很");
+            personRepository.save(person);
+        }
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
 
+    @RequestMapping(value = "hello1", method = RequestMethod.GET)
+    public ResponseEntity<?> hello1(){
+
+
+        for(int i = 0; i< 1000; i++){
+            Jeffchan jeffchan = new Jeffchan();
+            jeffchan.setName("周杰伦首次亮相幕前，是在1997年8月，当时是因为高中同学参加TVBS-G的选秀节目《超级新人王》而为朋友担任钢琴伴奏。虽然他同学歌唱未获奖，该节目主持人吴宗宪却对周杰伦的乐谱作曲工整印象深刻，认为其有潜力进而签约发掘进入乐坛。吴宗宪非常肯定周杰伦的才华，所以先让他专注作曲的历练后再出唱片，虽写过多首歌曲不过仍有不少曲目未被他人采用而退稿，例如：刘德华《眼泪知道》和张惠妹《忍者》。吴宗宪对周杰伦很");
+            jeffchanRepository.save(jeffchan);
+        }
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
 
@@ -52,10 +78,10 @@ public class HelloController {
 
         PageRequest pageRequest =  PageRequest.of(1,1,Sort.by(Sort.Direction.DESC, "age"));
 
-        Page<Person> hh = personRepository.findByAge(11, pageRequest);
 
+        personEsDao.getPersonHighLight();
 
-        return new ResponseEntity<Object>(hh.getContent(), HttpStatus.OK);
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
 
 }

@@ -15,18 +15,8 @@ public class Person {
 
     @Id
     private  String id;
-    private int age;
     @Field(analyzer = "ik_max_word")
     private String name;
-    private String desc;
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public String getName() {
         return name;
@@ -42,13 +32,5 @@ public class Person {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 }
