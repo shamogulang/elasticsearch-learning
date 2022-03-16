@@ -66,11 +66,16 @@ public class HelloController {
     public ResponseEntity<?> hello1(){
 
 
-        for(int i = 0; i< 1000; i++){
-            Jeffchan jeffchan = new Jeffchan();
-            UUID uuid = UUID.randomUUID();
-            jeffchan.setName(uuid.toString());
-            jeffchanRepository.save(jeffchan);
+
+        for(int j = 0; j < 10000; j++){
+            List<Jeffchan> jeffchan2List = new ArrayList();
+            for(int i = 0; i< 100000; i++){
+                Jeffchan jeffchan = new Jeffchan();
+                UUID uuid = UUID.randomUUID();
+                jeffchan.setName(uuid.toString());
+                jeffchan2List.add(jeffchan);
+            }
+            jeffchanRepository.saveAll(jeffchan2List);
         }
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }

@@ -50,7 +50,7 @@ public class PersonEsDao {
         // 2、指定查询条件
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         // 2.1、查询条件
-        searchSourceBuilder.query(QueryBuilders.matchPhrasePrefixQuery("name", "ef"));
+        searchSourceBuilder.query(QueryBuilders.matchQuery("name", "ef"));
         // 2.2、指定高亮
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.field("name", 10);
