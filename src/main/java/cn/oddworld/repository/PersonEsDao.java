@@ -34,13 +34,23 @@ public class PersonEsDao {
 
     public List<Person> getjeffchan(){
 
+        jeffchan();
+        System.out.println("=====");
+//        jeffchan2();
+//        System.out.println("=====");
+//        jeffchan3();
+        return null;
+    }
+
+
+    public void jeffchan(){
         // 1、SearchRequest
         SearchRequest searchRequest = new SearchRequest("jeffchan");
 
         // 2、指定查询条件
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         // 2.1、查询条件
-        searchSourceBuilder.query(QueryBuilders.termQuery("name", "陈建辉陈剑辉陈建"));
+        searchSourceBuilder.query(QueryBuilders.matchPhrasePrefixQuery("name", "ef"));
         // 2.2、指定高亮
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.field("name", 10);
@@ -67,7 +77,78 @@ public class PersonEsDao {
             ;
             System.out.println(e.getCause());
         }
-        return null;
+    }
+
+    public void jeffchan2(){
+        // 1、SearchRequest
+        SearchRequest searchRequest = new SearchRequest("jeffchan2");
+
+        // 2、指定查询条件
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        // 2.1、查询条件
+        searchSourceBuilder.query(QueryBuilders.matchPhrasePrefixQuery("name", "陈建"));
+        // 2.2、指定高亮
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.field("name", 10);
+//                .preTags("<font color='red'>") 这里可以指定标签
+//                .postTags("</font>");
+
+        searchSourceBuilder.highlighter(highlightBuilder);
+        searchSourceBuilder.size(10);
+        searchRequest.source(searchSourceBuilder);
+
+        System.out.println(searchRequest.source().toString());
+        try {
+            SearchResponse response = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+            SearchHit[] hits = response.getHits().getHits();
+            for(SearchHit searchHit : hits){
+                Map<String, HighlightField> highlightFields = searchHit.getHighlightFields();
+                for(String key : highlightFields.keySet()){
+                    System.out.println(key);
+                    System.out.println(highlightFields.get(key).fragments()[0]);
+                }
+                System.out.println(searchHit.getSourceAsString());
+            }
+        }catch (Exception e){
+            ;
+            System.out.println(e.getCause());
+        }
+    }
+
+    public void jeffchan3(){
+        // 1、SearchRequest
+        SearchRequest searchRequest = new SearchRequest("jeffchan3");
+
+        // 2、指定查询条件
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        // 2.1、查询条件
+        searchSourceBuilder.query(QueryBuilders.matchPhraseQuery("name", "陈建"));
+        // 2.2、指定高亮
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.field("name", 10);
+//                .preTags("<font color='red'>") 这里可以指定标签
+//                .postTags("</font>");
+
+        searchSourceBuilder.highlighter(highlightBuilder);
+        searchSourceBuilder.size(10);
+        searchRequest.source(searchSourceBuilder);
+
+        System.out.println(searchRequest.source().toString());
+        try {
+            SearchResponse response = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+            SearchHit[] hits = response.getHits().getHits();
+            for(SearchHit searchHit : hits){
+                Map<String, HighlightField> highlightFields = searchHit.getHighlightFields();
+                for(String key : highlightFields.keySet()){
+                    System.out.println(key);
+                    System.out.println(highlightFields.get(key).fragments()[0]);
+                }
+                System.out.println(searchHit.getSourceAsString());
+            }
+        }catch (Exception e){
+            ;
+            System.out.println(e.getCause());
+        }
     }
 
     public List<Person> getPersonHighLight(){

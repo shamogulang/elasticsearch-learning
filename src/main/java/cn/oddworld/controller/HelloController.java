@@ -1,10 +1,10 @@
 package cn.oddworld.controller;
 
 import cn.oddworld.Jeffchan;
+import cn.oddworld.Jeffchan2;
+import cn.oddworld.Jeffchan3;
 import cn.oddworld.Person;
-import cn.oddworld.repository.JeffchanRepository;
-import cn.oddworld.repository.PersonEsDao;
-import cn.oddworld.repository.PersonRepository;
+import cn.oddworld.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Copyright 2021 ChinaMobile Info. Tech Ltd. All rights reserved.
@@ -33,6 +36,10 @@ public class HelloController {
     private PersonEsDao personEsDao;
     @Autowired
     private JeffchanRepository jeffchanRepository;
+    @Autowired
+    private Jeffchan3Repository jeffchan3Repository;
+    @Autowired
+    private Jeffchan2Repository jeffchan2Repository;
 
     @RequestMapping(value = "jeffchan", method = RequestMethod.GET)
     public ResponseEntity<?> jeffchan(){
@@ -48,7 +55,8 @@ public class HelloController {
 
         for(int i = 0; i< 1000; i++){
             Person person = new Person();
-            person.setName("周杰伦首次亮相幕前，是在1997年8月，当时是因为高中同学参加TVBS-G的选秀节目《超级新人王》而为朋友担任钢琴伴奏。虽然他同学歌唱未获奖，该节目主持人吴宗宪却对周杰伦的乐谱作曲工整印象深刻，认为其有潜力进而签约发掘进入乐坛。吴宗宪非常肯定周杰伦的才华，所以先让他专注作曲的历练后再出唱片，虽写过多首歌曲不过仍有不少曲目未被他人采用而退稿，例如：刘德华《眼泪知道》和张惠妹《忍者》。吴宗宪对周杰伦很");
+            UUID uuid = UUID.randomUUID();
+            person.setName(uuid.toString());
             personRepository.save(person);
         }
         return new ResponseEntity<Object>(null, HttpStatus.OK);
@@ -60,8 +68,40 @@ public class HelloController {
 
         for(int i = 0; i< 1000; i++){
             Jeffchan jeffchan = new Jeffchan();
-            jeffchan.setName("周杰伦首次亮相幕前，是在1997年8月，当时是因为高中同学参加TVBS-G的选秀节目《超级新人王》而为朋友担任钢琴伴奏。虽然他同学歌唱未获奖，该节目主持人吴宗宪却对周杰伦的乐谱作曲工整印象深刻，认为其有潜力进而签约发掘进入乐坛。吴宗宪非常肯定周杰伦的才华，所以先让他专注作曲的历练后再出唱片，虽写过多首歌曲不过仍有不少曲目未被他人采用而退稿，例如：刘德华《眼泪知道》和张惠妹《忍者》。吴宗宪对周杰伦很");
+            UUID uuid = UUID.randomUUID();
+            jeffchan.setName(uuid.toString());
             jeffchanRepository.save(jeffchan);
+        }
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "hello2", method = RequestMethod.GET)
+    public ResponseEntity<?> hello2(){
+
+
+        for(int j = 0; j < 10000; j++){
+            List<Jeffchan2> jeffchan2List = new ArrayList();
+            for(int i = 0; i< 100000; i++){
+                Jeffchan2 jeffchan2 = new Jeffchan2();
+                UUID uuid = UUID.randomUUID();
+                jeffchan2.setName(uuid.toString());
+                jeffchan2List.add(jeffchan2);
+            }
+            jeffchan2Repository.saveAll(jeffchan2List);
+        }
+
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "hello3", method = RequestMethod.GET)
+    public ResponseEntity<?> hello3(){
+
+
+        for(int i = 0; i< 1000; i++){
+            Jeffchan3 jeffchan3 = new Jeffchan3();
+            UUID uuid = UUID.randomUUID();
+            jeffchan3.setName(uuid.toString());
+            jeffchan3Repository.save(jeffchan3);
         }
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
