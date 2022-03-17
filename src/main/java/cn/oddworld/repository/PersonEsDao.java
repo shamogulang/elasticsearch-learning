@@ -2,6 +2,7 @@ package cn.oddworld.repository;
 
 import cn.oddworld.Jeffchan;
 import cn.oddworld.Person;
+import cn.oddworld.SplitStrUtil;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
@@ -21,6 +22,7 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -49,8 +51,18 @@ public class PersonEsDao {
 
         // 2、指定查询条件
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+        List<String> splitStr = SplitStrUtil.getSplitStr("44116e1234567");
+        List<String> fields = new ArrayList<String>();
+        for (int i = 0; i < splitStr.size(); i++){
+            fields.add("name");
+        }
+        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
+        for (int i = 0; i < fields.size(); i++) {
+            boolQuery.must(QueryBuilders.termQuery(fields.get(i), splitStr.get(i)));
+        }
         // 2.1、查询条件
-        searchSourceBuilder.query(QueryBuilders.matchQuery("name", "ef"));
+        searchSourceBuilder.query(boolQuery);
         // 2.2、指定高亮
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.field("name", 10);

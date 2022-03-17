@@ -1,9 +1,6 @@
 package cn.oddworld.controller;
 
-import cn.oddworld.Jeffchan;
-import cn.oddworld.Jeffchan2;
-import cn.oddworld.Jeffchan3;
-import cn.oddworld.Person;
+import cn.oddworld.*;
 import cn.oddworld.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,6 +37,12 @@ public class HelloController {
     private Jeffchan3Repository jeffchan3Repository;
     @Autowired
     private Jeffchan2Repository jeffchan2Repository;
+    @Autowired
+    private Jeffchan1Repository jeffchan1Repository;
+    @Autowired
+    private Jeffchan4Repository jeffchan4Repository;
+    @Autowired
+    private Jeffchan5Repository jeffchan5Repository;
 
     @RequestMapping(value = "jeffchan", method = RequestMethod.GET)
     public ResponseEntity<?> jeffchan(){
@@ -49,21 +52,10 @@ public class HelloController {
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
 
+
+
     @RequestMapping(value = "hello", method = RequestMethod.GET)
     public ResponseEntity<?> hello(){
-
-
-        for(int i = 0; i< 1000; i++){
-            Person person = new Person();
-            UUID uuid = UUID.randomUUID();
-            person.setName(uuid.toString());
-            personRepository.save(person);
-        }
-        return new ResponseEntity<Object>(null, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "hello1", method = RequestMethod.GET)
-    public ResponseEntity<?> hello1(){
 
 
 
@@ -80,11 +72,44 @@ public class HelloController {
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
 
+
+    @RequestMapping(value = "hello1", method = RequestMethod.GET)
+    public ResponseEntity<?> hello1(){
+
+        for(int j = 0; j < 100; j++){
+            List<Jeffchan1> jeffchan2List = new ArrayList();
+            for(int i = 0; i< 100000; i++){
+                Jeffchan1 jeffchan = new Jeffchan1();
+                UUID uuid = UUID.randomUUID();
+                jeffchan.setName(uuid.toString());
+                jeffchan2List.add(jeffchan);
+            }
+            jeffchan1Repository.saveAll(jeffchan2List);
+        }
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "hello4", method = RequestMethod.GET)
+    public ResponseEntity<?> hello4(){
+
+        for(int j = 0; j < 100; j++){
+            List<Jeffchan4> jeffchan2List = new ArrayList();
+            for(int i = 0; i< 100000; i++){
+                Jeffchan4 jeffchan = new Jeffchan4();
+                UUID uuid = UUID.randomUUID();
+                jeffchan.setName(uuid.toString());
+                jeffchan2List.add(jeffchan);
+            }
+            jeffchan4Repository.saveAll(jeffchan2List);
+        }
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "hello2", method = RequestMethod.GET)
     public ResponseEntity<?> hello2(){
 
 
-        for(int j = 0; j < 10000; j++){
+        for(int j = 0; j < 100; j++){
             List<Jeffchan2> jeffchan2List = new ArrayList();
             for(int i = 0; i< 100000; i++){
                 Jeffchan2 jeffchan2 = new Jeffchan2();
@@ -101,12 +126,31 @@ public class HelloController {
     @RequestMapping(value = "hello3", method = RequestMethod.GET)
     public ResponseEntity<?> hello3(){
 
+        for(int j = 0; j < 100; j++){
+            List<Jeffchan3> jeffchan3List = new ArrayList();
+            for(int i = 0; i< 100000; i++){
+                Jeffchan3 jeffchan3 = new Jeffchan3();
+                UUID uuid = UUID.randomUUID();
+                jeffchan3.setName(uuid.toString());
+                jeffchan3List.add(jeffchan3);
+            }
+            jeffchan3Repository.saveAll(jeffchan3List);
+        }
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
 
-        for(int i = 0; i< 1000; i++){
-            Jeffchan3 jeffchan3 = new Jeffchan3();
-            UUID uuid = UUID.randomUUID();
-            jeffchan3.setName(uuid.toString());
-            jeffchan3Repository.save(jeffchan3);
+    @RequestMapping(value = "hello5", method = RequestMethod.GET)
+    public ResponseEntity<?> hello5(){
+
+        for(int j = 0; j < 100; j++){
+            List<Jeffchan5> jeffchan5List = new ArrayList();
+            for(int i = 0; i< 100000; i++){
+                Jeffchan5 jeffchan5 = new Jeffchan5();
+                UUID uuid = UUID.randomUUID();
+                jeffchan5.setName(uuid.toString());
+                jeffchan5List.add(jeffchan5);
+            }
+            jeffchan5Repository.saveAll(jeffchan5List);
         }
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
