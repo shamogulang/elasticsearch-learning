@@ -2,6 +2,7 @@ package cn.oddworld.controller;
 
 import cn.oddworld.*;
 import cn.oddworld.repository.*;
+import cn.oddworld.test.MyAno1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,10 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Copyright 2021 ChinaMobile Info. Tech Ltd. All rights reserved.
@@ -44,10 +42,33 @@ public class HelloController {
     @Autowired
     private Jeffchan5Repository jeffchan5Repository;
 
+    @Autowired
+    private MyAno1 myAno1;
+
+    private byte[] hello = new byte[1024*1024*2];
+
+    @RequestMapping(value = "te", method = RequestMethod.GET)
+    public ResponseEntity<?> jeffchan1(){
+
+        myAno1.test();
+        myAno1.toString();
+
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
+
+
     @RequestMapping(value = "jeffchan", method = RequestMethod.GET)
     public ResponseEntity<?> jeffchan(){
 
 
+        personEsDao.getjeffchan();
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "jeffchan", method = RequestMethod.GET, headers = {"X-API-VERSION=v2"})
+    public ResponseEntity<?> jeffchanV2(){
+
+        System.out.println("版本2");
         personEsDao.getjeffchan();
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
@@ -58,13 +79,14 @@ public class HelloController {
     public ResponseEntity<?> hello(){
 
 
-
-        for(int j = 0; j < 10000; j++){
+        Random random = new Random();
+        for(int j = 0; j < 100; j++){
             List<Jeffchan> jeffchan2List = new ArrayList();
             for(int i = 0; i< 100000; i++){
                 Jeffchan jeffchan = new Jeffchan();
                 UUID uuid = UUID.randomUUID();
                 jeffchan.setName(uuid.toString());
+                jeffchan.setTime(random.nextLong());
                 jeffchan2List.add(jeffchan);
             }
             jeffchanRepository.saveAll(jeffchan2List);

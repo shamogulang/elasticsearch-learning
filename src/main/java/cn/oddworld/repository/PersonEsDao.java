@@ -59,7 +59,7 @@ public class PersonEsDao {
         }
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
         for (int i = 0; i < fields.size(); i++) {
-            boolQuery.must(QueryBuilders.termQuery(fields.get(i), splitStr.get(i)));
+            boolQuery.must(QueryBuilders.wildcardQuery(fields.get(i), splitStr.get(i)));
         }
         // 2.1、查询条件
         searchSourceBuilder.query(boolQuery);
