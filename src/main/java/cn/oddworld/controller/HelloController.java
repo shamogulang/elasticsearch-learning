@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Copyright 2021 ChinaMobile Info. Tech Ltd. All rights reserved.
@@ -58,8 +59,9 @@ public class HelloController {
 
 
     @RequestMapping(value = "jeffchan", method = RequestMethod.GET)
-    public ResponseEntity<?> jeffchan(){
+    public ResponseEntity<?> jeffchan() throws InterruptedException {
 
+        TimeUnit.SECONDS.sleep(5L);
 
         personEsDao.getjeffchan();
         return new ResponseEntity<Object>(null, HttpStatus.OK);

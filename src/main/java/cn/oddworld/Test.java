@@ -12,6 +12,9 @@ import java.util.stream.IntStream;
 public class Test {
 
     public static void main(String[] args) {
+
+
+
         CloseableHttpClient instace = HttpClientFactory.getInstace();
 
         HttpPost httpPost  = new HttpPost("http://www.baidu.com");

@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  **/
 @SpringBootApplication
 @MyFeignScanner("cn.oddworld")
-public class EsApplication {
+public class  EsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run( EsApplication.class, args);

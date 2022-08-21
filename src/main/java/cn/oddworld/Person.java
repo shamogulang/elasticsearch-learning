@@ -13,6 +13,10 @@ import org.springframework.data.elasticsearch.annotations.Field;
 @Document(indexName = "person", createIndex = true)
 public class Person {
 
+    public Person() {
+        System.out.println("helloxxx");
+    }
+
     @Id
     private  String id;
     @Field(analyzer = "ik_max_word")
