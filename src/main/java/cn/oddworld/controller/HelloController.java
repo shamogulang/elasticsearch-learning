@@ -48,6 +48,18 @@ public class HelloController {
 
     private byte[] hello = new byte[1024*1024*2];
 
+
+    @RequestMapping(value = "hellox", method = RequestMethod.GET)
+    public ResponseEntity<?> helloNgnix(){
+
+
+        System.out.println("hllo");
+        return new ResponseEntity<Object>("helloNgnix", HttpStatus.OK);
+    }
+
+
+
+
     @RequestMapping(value = "te", method = RequestMethod.GET)
     public ResponseEntity<?> jeffchan1(){
 
@@ -84,7 +96,7 @@ public class HelloController {
         Random random = new Random();
         for(int j = 0; j < 100; j++){
             List<Jeffchan> jeffchan2List = new ArrayList();
-            for(int i = 0; i< 100000; i++){
+            for(int i = 0; i< 1; i++){
                 Jeffchan jeffchan = new Jeffchan();
                 UUID uuid = UUID.randomUUID();
                 jeffchan.setName(uuid.toString());
@@ -102,7 +114,7 @@ public class HelloController {
 
         for(int j = 0; j < 100; j++){
             List<Jeffchan1> jeffchan2List = new ArrayList();
-            for(int i = 0; i< 100000; i++){
+            for(int i = 0; i< 1000; i++){
                 Jeffchan1 jeffchan = new Jeffchan1();
                 UUID uuid = UUID.randomUUID();
                 jeffchan.setName(uuid.toString());
@@ -196,5 +208,7 @@ public class HelloController {
 
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
+
+
 
 }

@@ -6,6 +6,9 @@ import cn.oddworld.SplitStrUtil;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.search.MultiSearchRequest;
+import org.elasticsearch.action.search.MultiSearchResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -23,8 +26,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import static org.elasticsearch.client.RequestOptions.DEFAULT;
 
 @Component
 public class PersonEsDao {
@@ -44,6 +51,10 @@ public class PersonEsDao {
         return null;
     }
 
+    public void saveJeffchan(){
+        IndexRequest request = new IndexRequest("jeffchan");
+
+    }
 
     public void jeffchan(){
         // 1、SearchRequest
@@ -71,11 +82,27 @@ public class PersonEsDao {
 
         searchSourceBuilder.highlighter(highlightBuilder);
         searchSourceBuilder.size(10);
+        Map<String, Object> jsonMap = new HashMap<>();
+        searchSourceBuilder.runtimeMappings(jsonMap);
         searchRequest.source(searchSourceBuilder);
 
+        String routing = "";
+        for(int i =0 ;  i < Integer.MAX_VALUE; i++){
+            String s = UUID.randomUUID().toString();
+            routing += s;
+            if(routing.getBytes().length > 4096){
+                break;
+            }
+        }
+        searchRequest.routing(routing);
         System.out.println(searchRequest.source().toString());
         try {
-            SearchResponse response = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+            MultiSearchRequest searchRequest1 = new MultiSearchRequest();
+            searchRequest1.add(searchRequest);
+            //SearchResponse response = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+            MultiSearchResponse msearch = restHighLevelClient.msearch(searchRequest1, DEFAULT);
+            MultiSearchResponse.Item[] responses = msearch.getResponses();
+            SearchResponse response = responses[0].getResponse();
             SearchHit[] hits = response.getHits().getHits();
             for(SearchHit searchHit : hits){
                 Map<String, HighlightField> highlightFields = searchHit.getHighlightFields();
