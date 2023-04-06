@@ -1,8 +1,11 @@
 package cn.oddworld.controller;
 
 import cn.oddworld.*;
+import cn.oddworld.apibean.ReindexReq;
 import cn.oddworld.repository.*;
 import cn.oddworld.test.MyAno1;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,9 +14,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -26,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class HelloController {
 
+    Logger log = LoggerFactory.getLogger(HelloController.class);
     @Autowired
     private PersonRepository personRepository;
     @Autowired
@@ -211,4 +217,13 @@ public class HelloController {
 
 
 
+    @RequestMapping(value = "reindex", method = RequestMethod.POST)
+    public ResponseEntity<?> reindex(@RequestBody ReindexReq reindexReq) throws IOException {
+
+
+        personEsDao.reindex(reindexReq);
+
+        log.info("reindex  done! sourceIndex = {} , targetIndex={} ", reindexReq.getSourceIndex(), reindexReq.getTargetIndex());
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
 }
