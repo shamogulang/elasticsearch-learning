@@ -244,7 +244,7 @@ public class PersonEsDao {
 
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY,
-                new UsernamePasswordCredentials("elastic", "084Dh12c5sl39JfcteMIXAnw"));
+                new UsernamePasswordCredentials("elastixc", "084Dh12c5sl39JfcteMIXAnxw"));
 
         RestHighLevelClient targetClient = new RestHighLevelClient(
                 RestClient.builder(
