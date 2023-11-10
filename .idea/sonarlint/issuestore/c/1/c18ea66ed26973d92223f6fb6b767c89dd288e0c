@@ -1,0 +1,7 @@
+
+O
+java:S1854"9Remove this useless assignment to local variable "write".(Ð½ûæ
+@
+java:S1481"*Remove this unused "write" local variable.(Ð½ûæ
+d
+java:S2095"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(ëŸ¥Ø

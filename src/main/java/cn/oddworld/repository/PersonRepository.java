@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 import java.util.List;
 
-public interface PersonRepository extends ElasticsearchRepository<Person, String> {
+public interface PersonRepository {
 
    List<Person> findByName(String name);
 

@@ -36,6 +36,7 @@ import org.elasticsearch.client.indices.PutMappingRequest;
 import org.elasticsearch.cluster.metadata.MappingMetadata;
 import org.elasticsearch.common.collect.ImmutableOpenMap;
 import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.core.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.InnerHitBuilder;
@@ -82,9 +83,20 @@ public class PersonEsDao {
         return null;
     }
 
-    public void saveJeffchan(){
-        IndexRequest request = new IndexRequest("jeffchan");
-
+    public void saveJeffchan() throws IOException {
+        IndexRequest request = new IndexRequest(
+                "posts",  // 索引 Index
+                "doc",  // Type
+                "1");  // 文档 Document Id
+        String jsonString = "{" +
+                "\"user\":\"kimchy\"," +
+                "\"postDate\":\"2013-01-30\"," +
+                "\"message\":\"trying out Elasticsearch\"" +
+                "}";
+        request.source(jsonString, XContentType.JSON); // 文档源格式为 json string
+        BulkRequest bulkRequest = new BulkRequest();
+        bulkRequest.add(request);
+        restHighLevelClient.bulk(bulkRequest, DEFAULT);
     }
 
     public void jeffchan(){
@@ -131,6 +143,7 @@ public class PersonEsDao {
             MultiSearchRequest searchRequest1 = new MultiSearchRequest();
             searchRequest1.add(searchRequest);
             //SearchResponse response = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+            saveJeffchan();
             MultiSearchResponse msearch = restHighLevelClient.msearch(searchRequest1, DEFAULT);
             MultiSearchResponse.Item[] responses = msearch.getResponses();
             SearchResponse response = responses[0].getResponse();

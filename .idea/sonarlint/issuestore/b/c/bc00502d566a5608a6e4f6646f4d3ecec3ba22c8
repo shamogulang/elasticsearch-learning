@@ -1,0 +1,20 @@
+
+T
+java:S1854"9Remove this useless assignment to local variable "start".(£ÎÊÙÿÿÿÿÿ
+U
+java:S1854"?Remove this useless assignment to local variable "allHeaders1".(åÜ
+E
+java:S1481"*Remove this unused "start" local variable.(£ÎÊÙÿÿÿÿÿ
+F
+java:S1481"0Remove this unused "allHeaders1" local variable.(åÜ
+S	java:S106!"9Replace this use of System.out or System.err by a logger.(®ÖĞùÿÿÿÿ
+S	java:S106%"9Replace this use of System.out or System.err by a logger.(†ßÔŠıÿÿÿÿ
+S	java:S106("9Replace this use of System.out or System.err by a logger.(¸š—ışÿÿÿÿ
+Q	java:S125*"<This block of commented-out lines of code should be removed.(Ÿ‚²ï
+[
+java:S1128"@Remove this unused import 'org.apache.http.entity.StringEntity'.(ş©Ú‹şÿÿÿÿ
+S
+java:S1128"=Remove this unused import 'org.apache.http.util.EntityUtils'.(Å‹»
+R
+java:S1128
+"7Remove this unused import 'java.util.stream.IntStream'.(ÙÉ½Ÿùÿÿÿÿ

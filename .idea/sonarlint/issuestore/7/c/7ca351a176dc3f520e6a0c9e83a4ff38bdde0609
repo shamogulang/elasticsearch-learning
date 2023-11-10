@@ -1,0 +1,17 @@
+
+S	java:S106 "9Replace this use of System.out or System.err by a logger.(ã¤ëüÿÿÿÿ
+N	java:S106""9Replace this use of System.out or System.err by a logger.(ùıÆ
+P
+java:S11186":Add a private constructor to hide the implicit public one.(ÈçâÏ
+P
+java:S1118A":Add a private constructor to hide the implicit public one.(Šö•ò
+N	java:S106E"9Replace this use of System.out or System.err by a logger.(Åìà
+P
+java:S1118L":Add a private constructor to hide the implicit public one.(Ğ“‡È
+S	java:S106T"9Replace this use of System.out or System.err by a logger.(¯‚òğşÿÿÿÿ
+a
+java:S2095"FUse try-with-resources or close this "Selector" in a "finally" clause.(ŠŞö ùÿÿÿÿ
+l
+java:S2095"QUse try-with-resources or close this "ServerSocketChannel" in a "finally" clause.(ãöŒÎüÿÿÿÿ
+=
+java:S2189""Add an end condition to this loop.(˜ïˆÿÿÿÿÿ

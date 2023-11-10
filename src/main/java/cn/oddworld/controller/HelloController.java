@@ -32,21 +32,21 @@ import java.util.concurrent.TimeUnit;
 public class HelloController {
 
     Logger log = LoggerFactory.getLogger(HelloController.class);
-    @Autowired
+    //@Autowired
     private PersonRepository personRepository;
     @Autowired
     private PersonEsDao personEsDao;
-    @Autowired
+    //@Autowired
     private JeffchanRepository jeffchanRepository;
-    @Autowired
+    //@Autowired
     private Jeffchan3Repository jeffchan3Repository;
-    @Autowired
+    //@Autowired
     private Jeffchan2Repository jeffchan2Repository;
-    @Autowired
+    //@Autowired
     private Jeffchan1Repository jeffchan1Repository;
-    @Autowired
+    //@Autowired
     private Jeffchan4Repository jeffchan4Repository;
-    @Autowired
+    //@Autowired
     private Jeffchan5Repository jeffchan5Repository;
 
     @Autowired
@@ -109,7 +109,7 @@ public class HelloController {
                 jeffchan.setTime(random.nextLong());
                 jeffchan2List.add(jeffchan);
             }
-            jeffchanRepository.saveAll(jeffchan2List);
+            //jeffchanRepository.saveAll(jeffchan2List);
         }
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
@@ -126,7 +126,7 @@ public class HelloController {
                 jeffchan.setName(uuid.toString());
                 jeffchan2List.add(jeffchan);
             }
-            jeffchan1Repository.saveAll(jeffchan2List);
+            //jeffchan1Repository.saveAll(jeffchan2List);
         }
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
@@ -142,7 +142,7 @@ public class HelloController {
                 jeffchan.setName(uuid.toString());
                 jeffchan2List.add(jeffchan);
             }
-            jeffchan4Repository.saveAll(jeffchan2List);
+            //jeffchan4Repository.saveAll(jeffchan2List);
         }
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
@@ -159,7 +159,7 @@ public class HelloController {
                 jeffchan2.setName(uuid.toString());
                 jeffchan2List.add(jeffchan2);
             }
-            jeffchan2Repository.saveAll(jeffchan2List);
+            //jeffchan2Repository.saveAll(jeffchan2List);
         }
 
         return new ResponseEntity<Object>(null, HttpStatus.OK);
@@ -176,7 +176,7 @@ public class HelloController {
                 jeffchan3.setName(uuid.toString());
                 jeffchan3List.add(jeffchan3);
             }
-            jeffchan3Repository.saveAll(jeffchan3List);
+            //jeffchan3Repository.saveAll(jeffchan3List);
         }
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
@@ -192,7 +192,7 @@ public class HelloController {
                 jeffchan5.setName(uuid.toString());
                 jeffchan5List.add(jeffchan5);
             }
-            jeffchan5Repository.saveAll(jeffchan5List);
+            //jeffchan5Repository.saveAll(jeffchan5List);
         }
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }

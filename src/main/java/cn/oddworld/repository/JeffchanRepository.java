@@ -8,7 +8,8 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 import java.util.List;
 
-public interface JeffchanRepository extends ElasticsearchRepository<Jeffchan, String> {
+public interface JeffchanRepository // extends ElasticsearchRepository<Jeffchan, String>
+{
 
    List<Jeffchan> findByName(String name);
 

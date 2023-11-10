@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 import java.util.List;
 
-public interface Jeffchan2Repository extends ElasticsearchRepository<Jeffchan2, String> {
+public interface Jeffchan2Repository  {
 
    List<Jeffchan2> findByName(String name);
 
